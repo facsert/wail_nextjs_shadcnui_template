@@ -16,20 +16,25 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   distDir: "dist",
+  output: "export",
+  trailingSlash: true,
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;
 ````
 
-golang 默认嵌入 `//go:embed all:frontend/dist`, 改为 `//go:embed all:frontend/dist/build`  
-NextJs 16 会生成 lock 文件锁定进程, golang 无法嵌入
+NextJs 16 `next dev` 会生成 lock 文件锁定进程, golang 无法嵌入
 
 ```go
-// main.go 修改嵌入路径
+// wails dev 模式下 main.go 修改嵌入路径
+// wails build 模式下 main.go 需改回原本路径
 
 //go:embed all:frontend/dist/build
 var assets embed.FS
-````
+```
 
 ## 快速使用
 
