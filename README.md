@@ -1,19 +1,42 @@
-# README
+# Wails 模板
 
-## About
+## 介绍
 
-This is the official Wails Next-TS-shadcn UI template.
+这是一个 Wails 开发桌面应用模板, 前端使用 NextJs 16.1 + Shadcn ui
 
-You can configure the project by editing `wails.json`. More information about the project settings can be found
-here: https://wails.io/docs/reference/project-config
+## 改动
 
-## Live Development
+NextJs 默认输入到 `.next`, 改为输出到 `dist`  
+已添加大量 shadcn ui 默认组件
 
-To run in live development mode, run `wails dev` in the project directory. This will run a Vite development
-server that will provide very fast hot reload of your frontend changes. If you want to develop in a browser
-and have access to your Go methods, there is also a dev server that runs on http://localhost:34115. Connect
-to this in your browser, and you can call your Go code from devtools.
+```ts
+// frontend/next.config.ts 添加 distDir 指定输出路径
+import type { NextConfig } from "next";
 
-## Building
+const nextConfig: NextConfig = {
+  /* config options here */
+  distDir: "dist",
+};
 
-To build a redistributable, production mode package, use `wails build`.
+export default nextConfig;
+````
+
+golang 默认嵌入 `//go:embed all:frontend/dist`, 改为 `//go:embed all:frontend/dist/build`  
+NextJs 16 会生成 lock 文件锁定进程, golang 无法嵌入
+
+```go
+// main.go 修改嵌入路径
+
+//go:embed all:frontend/dist/build
+var assets embed.FS
+````
+
+## 快速使用
+
+```bash
+ # 开发模式, 支持热更新
+ $ wails dev
+ 
+ # 构建
+ $ wails build
+```
