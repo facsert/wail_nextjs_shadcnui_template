@@ -1,13 +1,13 @@
 {
   "$schema": "https://wails.io/schemas/config.v2.json",
-  "name": "new",
-  "outputfilename": "new",
+  "name": "template",
+  "outputfilename": "template",
   "frontend:install": "pnpm install",
   "frontend:build": "pnpm run build",
   "frontend:dev:watcher": "pnpm run dev",
   "frontend:dev:serverUrl": "auto",
   "author": {
     "name": "facsert",
-    "email": "facsert@outlook.com"
+    "email": "facsert@mail.com"
   }
 }

@@ -1,5 +1,7 @@
 
-export default function Home() {
+
+
+export default function RootPage() {
   return (
     <div>
       Root Page

@@ -21,13 +21,20 @@ const nextConfig: NextConfig = {
 export default nextConfig;
 ````
 
+
 golang 默认嵌入 `//go:embed all:frontend/dist`, 改为 `//go:embed all:frontend/dist/build`  
 NextJs 16 会生成 lock 文件锁定进程, golang 无法嵌入
 
 ```go
-// main.go 修改嵌入路径
+// wails dev 模式下 main.go 修改嵌入路径为 frontend/dist/build
 
 //go:embed all:frontend/dist/build
+var assets embed.FS
+
+
+// wails build 模式下 main.go 还原嵌入路径为 frontend/dist
+
+//go:embed all:frontend/dist
 var assets embed.FS
 ````
 
@@ -37,6 +44,6 @@ var assets embed.FS
  # 开发模式, 支持热更新
  $ wails dev
  
- # 构建
+ # 构建桌面应用
  $ wails build
 ```
