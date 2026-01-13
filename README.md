@@ -16,10 +16,16 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   distDir: "dist",
+  output: "export",
+  trailingSlash: true,
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;
 ````
+
 
 
 golang 默认嵌入 `//go:embed all:frontend/dist`, 改为 `//go:embed all:frontend/dist/build`  
